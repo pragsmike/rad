@@ -7,8 +7,11 @@
       :content
       first
       ((juxt :tag :content))
+      ((fn [[k v]] [k (first v)]))
       (apply hash-map)
       ))
+
+
 
 (defn tagged->semantic [tag-content-pairs]
   (map (juxt :tag :content) tag-content-pairs)
@@ -36,6 +39,14 @@
        (map tagged->semantic)
        (map dosubs)
        ))
+
+(defn grc-block-layout [grc-block]
+  (select-keys grc-block [:_coordinate :_enabled :_rotation
+                          :author :category :comment :description
+                          :id :key :qt_qss_theme :title :window_size])
+  )
+(defn grc-layout [grc]
+  (map grc-block-layout (grc-blocks grc)))
 
 (comment
   (def grc (clojure.xml/parse "test/two.grc"))
