@@ -43,8 +43,8 @@
 (defn grc-block-layout [grc-block]
   (select-keys grc-block [:_coordinate :_enabled :_rotation
                           :author :category :comment :description
-                          :id :key :qt_qss_theme :title :window_size])
-  )
+                          :id :key :qt_qss_theme :title :window_size]))
+
 (defn grc-layout [grc]
   (map grc-block-layout (grc-blocks grc)))
 
